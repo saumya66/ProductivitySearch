@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['ProductiveSearch.py'],
-             pathex=['D:\\Coding GCB\\Python (Building)\\ProductiveSearch'],
+             pathex=['D:\\Coding GCB\\Python (Building)\\ProductiveSearch\\ProductivitySearch'],
              binaries=[],
              datas=[],
              hiddenimports=[],

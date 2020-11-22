@@ -1,4 +1,5 @@
 import webbrowser 
+import os
 from tkinter import *
 
 
@@ -38,10 +39,10 @@ q= Entry(root,textvariable=q_var,justify=CENTER )
 q.focus_force()
 q.place(relx = 0.5,  rely = 0.6, anchor = 'center') 
 
-
+ 
 
 bt= Button(root, text="Search",command=searchYoutube)
-img= PhotoImage(file="D:/Coding GCB/Python (Building)/ProductiveSearch/res/do1.png")
+img= PhotoImage(file=os.path.abspath('res/do1.png'))
 bt.config(image=img)
 bt.place(relx = 0.5,  rely = 0.7, anchor = 'center')
  
