@@ -79,7 +79,7 @@ img = PhotoImage(file=os.path.abspath('res/do1.png'))
 bt.config(image=img)
 bt.place(relx=0.5,  rely=0.7, anchor='center')
 
-theme_toggle = Button(root, text="Toggle Light Theme", bg="gray10", fg="white", activebackground="gray10",
+theme_toggle = Button(root, text="Toggle Theme", bg="gray10", fg="white", activebackground="gray10",
                       activeforeground="white",
                       command=toggle_light_theme)
 theme_toggle.place(relx=0.99, rely=0.99, anchor='se')
