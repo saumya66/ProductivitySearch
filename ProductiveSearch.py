@@ -1,15 +1,51 @@
 import webbrowser 
 import os
+import platform
 from tkinter import *
+
+LIGHT_THEME = False
+
+def toggle_light_theme(*args):
+    """
+    Nota Bene: For the light theme I am using plain white as the background color.
+    This may or may not look good on Windows (I use Linux), so you might need to find a softer color.
+    """
+
+    global root, lbl, theme_toggle, LIGHT_THEME
+    if not LIGHT_THEME:
+        root['bg'] = 'white'
+        lbl['bg'] = 'white'
+        theme_toggle['bg'] = 'white'
+        theme_toggle['fg'] = 'black'
+        LIGHT_THEME = True
+    else:
+        root['bg'] = 'gray10'
+        lbl['bg'] = 'gray10'
+        theme_toggle['bg'] = 'gray10'
+        theme_toggle['fg'] = 'white'
+        LIGHT_THEME = False
+    root.update()
+
+
+def get_browser():
+    if platform.system() == "Linux":
+        return 'firefox', '/usr/bin/firefox'
+    elif platform.system() == "Windows":
+        return 'chrome', "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    else:
+        raise OSError("Unfortunately, your OS is not supported.")
 
 
 def searchYoutube():
     query = q.get()
-    url = "https://www.youtube.com/results?search_query="+query+""   
-    webbrowser.register('chrome',
-	None,
-	webbrowser.BackgroundBrowser("C:\Program Files\Google\Chrome\Application\chrome.exe"))
-    webbrowser.get('chrome').open_new(url)
+    url = "https://www.youtube.com/results?search_query="+query+""
+    browser = get_browser()
+    '''
+    webbrowser.register(browser[0],  # This is not necessary on Linux, but it might still be needed on Windows
+                        None,        # If so, an if statement based on platform.system() like in get_browser() should do
+                        webbrowser.BackgroundBrowser(browser[1])),
+    '''
+    webbrowser.get(browser[0]).open_new(url)
 
 # def pr(): 
 #     query = q.get()
@@ -17,7 +53,7 @@ def searchYoutube():
 #     q_var.set("")
    
 
-root =Tk()
+root = Tk()
 root.title("Productive Search")
 root.geometry('500x300')
 root.configure(bg="gray10")
@@ -25,26 +61,28 @@ root.configure(bg="gray10")
 # tstframe= Frame(root)
 # tstframe.grid(row=0,column=0)
 
+lbl = Label(root, text="Search Youtube:", font=('impact' if platform.system() == "Windows" else "Arial Black", 30,),
+            fg="red2", bg="gray10")
+lbl.place(relx=0.5, rely=0.4, anchor='center')
 
+# lbl.grid(row=0,column=1,)
 
-lbl = Label(root, text="Search Youtube :",font=('Impact',30,),fg="red2",bg="gray10" )
-lbl.place(relx = 0.5,  
-                   rely = 0.4, 
-                   anchor = 'center') 
-#lbl.grid(row=0,column=1,)
+q_var = StringVar()
 
-q_var=StringVar()
-
-q= Entry(root,textvariable=q_var,justify=CENTER )
+q = Entry(root, textvariable=q_var, justify=CENTER)
 q.focus_force()
-q.place(relx = 0.5,  rely = 0.6, anchor = 'center') 
+q.place(relx=0.5,  rely=0.6, anchor='center')
 
- 
 
-bt= Button(root, text="Search",command=searchYoutube)
-img= PhotoImage(file=os.path.abspath('res/do1.png'))
+bt = Button(root, text="Search", command=searchYoutube)
+img = PhotoImage(file=os.path.abspath('res/do1.png'))
 bt.config(image=img)
-bt.place(relx = 0.5,  rely = 0.7, anchor = 'center')
+bt.place(relx=0.5,  rely=0.7, anchor='center')
+
+theme_toggle = Button(root, text="Toggle Light Theme", bg="gray10", fg="white", activebackground="gray10",
+                      activeforeground="white",
+                      command=toggle_light_theme)
+theme_toggle.place(relx=0.99, rely=0.99, anchor='se')
  
 
 # root.columnconfigure(0, weight=1)
