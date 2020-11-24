@@ -40,11 +40,11 @@ def searchYoutube():
     query = q.get()
     url = "https://www.youtube.com/results?search_query="+query+""
     browser = get_browser()
-    '''
+    
     webbrowser.register(browser[0],  # This is not necessary on Linux, but it might still be needed on Windows
                         None,        # If so, an if statement based on platform.system() like in get_browser() should do
                         webbrowser.BackgroundBrowser(browser[1])),
-    '''
+    
     webbrowser.get(browser[0]).open_new(url)
 
 # def pr(): 
