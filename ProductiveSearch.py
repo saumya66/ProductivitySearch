@@ -6,10 +6,7 @@ from tkinter import *
 LIGHT_THEME = False
 
 def toggle_light_theme(*args):
-    """
-    Nota Bene: For the light theme I am using plain white as the background color.
-    This may or may not look good on Windows (I use Linux), so you might need to find a softer color.
-    """
+  
 
     global root, lbl, theme_toggle, LIGHT_THEME
     if not LIGHT_THEME:
@@ -47,25 +44,19 @@ def searchYoutube():
     
     webbrowser.get(browser[0]).open_new(url)
 
-# def pr(): 
-#     query = q.get()
-#     print(query)
-#     q_var.set("")
-   
+
 
 root = Tk()
 root.title("Productive Search")
 root.geometry('500x300')
 root.configure(bg="gray10")
 
-# tstframe= Frame(root)
-# tstframe.grid(row=0,column=0)
 
 lbl = Label(root, text="Search Youtube:", font=('impact' if platform.system() == "Windows" else "Arial Black", 30,),
             fg="red2", bg="gray10")
 lbl.place(relx=0.5, rely=0.4, anchor='center')
 
-# lbl.grid(row=0,column=1,)
+
 
 q_var = StringVar()
 
@@ -85,8 +76,6 @@ theme_toggle = Button(root, text="Toggle Theme", bg="gray10", fg="white", active
 theme_toggle.place(relx=0.99, rely=0.99, anchor='se')
  
 
-# root.columnconfigure(0, weight=1)
-# root.rowconfigure(0, weight=1)
 root.mainloop()
 
 
